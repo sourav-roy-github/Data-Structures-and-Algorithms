@@ -1,0 +1,21 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        
+        LinkedList<String> output_array = new LinkedList();
+        if(digits.length() == 0) return output_array;
+        output_array.add("");
+        String[] charArray = new String[]{"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        
+        for(int i = 0; i < digits.length(); i++){
+            int index = Character.getNumericValue(digits.charAt(i));
+            while(output_array.peek().length() == i){
+                String permutation = output_array.remove();
+                for(char c: charArray[index].toCharArray()){
+                    output_array.add(permutation + c);
+                }
+            }
+        }
+        return output_array;
+        
+    }
+}
