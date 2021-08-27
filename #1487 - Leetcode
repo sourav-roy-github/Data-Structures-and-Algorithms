@@ -1,0 +1,33 @@
+class Solution {
+    public String[] getFolderNames(String[] names) {
+     
+        HashMap<String, Integer> map = new HashMap<>();
+        String[] result = new String[names.length];
+        
+        for(int i = 0; i < names.length; i++){
+            
+            if(map.containsKey(names[i])){
+                StringBuilder sb = new StringBuilder(names[i]);
+                Integer val = map.get(names[i]);
+                sb.append('(');
+                sb.append(val);
+                sb.append(')');
+                while(map.containsKey(sb.toString())){
+                    sb = new StringBuilder(names[i]);
+                    val++;
+                    sb.append('(');
+                    sb.append(val);
+                    sb.append(')');
+                }
+                result[i] = sb.toString();
+                map.put(sb.toString(), 1);
+                map.put(names[i],val + 1);
+            }
+            else{
+                map.put(names[i] , 1);
+                result[i] = names[i];
+            }
+        }
+        return result;
+    }
+}
