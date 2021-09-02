@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        
+        List<List<Integer>> a = new ArrayList<>();
+        compute(root, a, 0);
+        return a;
+        
+    }
+    public void compute(TreeNode b, List<List<Integer>> a, int level){
+        
+        if(b == null) return;
+        if(a.size() == level)
+            a.add(new ArrayList<Integer>());
+        if(level % 2 == 0)
+            a.get(level).add(b.val);
+       else    
+            a.get(level).add(0, b.val);
+        
+        compute(b.left, a, level + 1);
+        compute(b.right, a, level + 1);
+    }
+}
