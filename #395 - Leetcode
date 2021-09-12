@@ -1,22 +1,21 @@
 class Solution {
     public int longestSubstring(String s, int k) {
-        return helper(s,0,s.length(),k);
+        return helper(s, 0, s.length(), k);
     }
     public int helper(String s, int start, int end, int k){
-        if(end < k) return 0;
-        int[] count = new int[26];
+        if(end < k) return 0; //the length of the string can't be less than k
+        int[] count_map = new int[26]; //constant space to keep count of the chars
         
-        for(int i = start; i < end; i++){
-            count[s.charAt(i) - 'a']++;
+        for(int i = 0; i < s.length(); i++){
+            count_map[s.charAt(i) - 'a']++; // the count has been stored
         }
         
         for(int mid = start; mid < end; mid++){
-            if(count[s.charAt(mid) - 'a'] >= k) continue;
-            int midNext = mid + 1;
-            for(int i = midNext; i < end; i++){
-                while(midNext < end && count[s.charAt(midNext) - 'a'] < k) midNext++;
-            }
-            return Math.max(helper(s,0,mid,k), helper(s, midNext, end,k));
+            if(count_map[s.charAt(mid) - 'a'] >= k) continue;
+            
+            int midNext = mid + 1; //element less than k count has been found
+            while(midNext < end && count_map[s.charAt(midNext) - 'a'] < k) midNext++;
+            return Math.max(helper(s,start,mid,k), helper(s,midNext,end,k));
         }
         return end - start;
     }
