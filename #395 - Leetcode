@@ -14,8 +14,10 @@ class Solution {
             if(count_map[s.charAt(mid) - 'a'] >= k) continue;
             
             int midNext = mid + 1; //element less than k count has been found
+            
             while(midNext < end && count_map[s.charAt(midNext) - 'a'] < k) midNext++;
-            return Math.max(helper(s,start,mid,k), helper(s,midNext,end,k));
+            
+            return Math.max(helper(s,start,mid,k), helper(s,midNext,end,k)); //once the element is found with count less than k, we recursively call the function on the left and right side of the element
         }
         return end - start;
     }
