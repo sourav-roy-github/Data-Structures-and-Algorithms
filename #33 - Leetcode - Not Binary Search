@@ -1,0 +1,27 @@
+class Solution {
+    public int search(int[] nums, int target) {
+
+        int first = -1;
+        //int last = -1
+        for (int i = 0; i < nums.length; i++){
+            
+            if( nums[i] != target){
+                
+                continue;
+            }
+            if(nums[i] == target){
+                
+                first = i;
+            }
+        }
+        if(first != -1){
+            
+            return first;
+        }
+        else{
+            
+            return -1;
+        }
+        
+    }
+}
