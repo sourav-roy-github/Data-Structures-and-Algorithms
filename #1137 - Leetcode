@@ -1,0 +1,16 @@
+class Solution {
+      public int tribonacci(int n) {
+        if(n<=2){ // if n less than or equal to 2 return 1 if it is 1 or 2
+            return n==2 || n==1? 1:0; 
+        }
+        int dp[] = new int[n+1]; // length n+1 because the series is 0-indexed (EX: n=5 will have 6 integers: 0,1,1,2,4,7)
+        dp[0] = 0; dp[1] = 1; dp[2] = 1;
+        
+        for(int i=3; i<dp.length;i++){
+            dp[i] = dp[i-3] + dp[i-2] + dp[i-1]; // add last 3 values
+            //System.out.println(dp[i]);
+        }
+            
+        return dp[dp.length-1];
+    }
+}
