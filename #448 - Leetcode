@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> output = new ArrayList<>();
+        if(nums == null || nums.length == 0) return output;
+        
+        for(int x: nums){
+            int index = Math.abs(x) - 1;
+            if(nums[index] > 0){
+                nums[index] *= -1;
+            }
+        }
+        for(int x = 0; x < nums.length; x++){
+            if(nums[x] > 0){
+                output.add(x + 1);
+            }
+        }
+        return output;
+    }
+}
+
+//[1,1,2,3,4,7,8]
+//TC - O(n)
+//SC - O(1)
