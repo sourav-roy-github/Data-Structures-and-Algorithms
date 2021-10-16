@@ -1,0 +1,22 @@
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        //inorder traversal will yield the values in an increasing order
+        List<Integer> vals = new ArrayList();
+        inorder(root, vals);
+        TreeNode ans = new TreeNode(0), cur = ans;
+        for (int v: vals) {
+            cur.right = new TreeNode(v);
+            cur = cur.right;
+        }
+        return ans.right;   
+    }
+    public void inorder(TreeNode root, List<Integer> vals){
+        if(root == null) return;
+        inorder(root.left, vals);
+        vals.add(root.val);
+        inorder(root.right,vals);
+    }
+}
+
+//TC - O(N)
+//SC - O(N)
