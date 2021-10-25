@@ -1,2 +1,2 @@
-# Leetcode_Sourav_Roy
-Leetcode Questions Solved - Language - Java
+# Sourav_Roy
+Alorithm Questions Solved - Language - Java
