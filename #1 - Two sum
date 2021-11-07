@@ -17,3 +17,5 @@ class Solution {
         
     }
 }
+//Time - O(N)
+//space - O(N)
