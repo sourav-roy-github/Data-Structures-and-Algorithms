@@ -1,0 +1,18 @@
+class Solution {
+    public int connectSticks(int[] sticks) {
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for(int stick: sticks){
+            q.offer(stick);
+        }
+        int minCost = 0;
+        while(q.size() >= 2){
+            int first = q.poll(), second = q.poll();
+            int add = first + second;
+            minCost += add;
+            q.offer(add);
+        }
+        return minCost;
+    }
+}
+//Tc - O(nlogn)
+//space - O(n)
