@@ -1,0 +1,18 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        Arrays.sort(boxTypes , (a,b) -> b[1] - a[1]);
+        int unitCount = 0;
+        for(int[] boxtype : boxTypes){
+            int boxCount = Math.min(truckSize, boxtype[0]);
+            unitCount += boxCount * boxtype[1];
+            truckSize -= boxCount;
+            if(truckSize == 0)
+                break;
+        }
+        return unitCount;
+    }
+}
+
+
+//Time - O(nlogn)
+//space - o(1)
