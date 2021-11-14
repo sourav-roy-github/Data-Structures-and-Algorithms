@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        Arrays.sort(products);
+        List<List<String>> output = new ArrayList<>();
+        int start = 0, binary_start = 0, n = products.length;
+        String prefix = new String();
+        for(char c : searchWord.toCharArray()){
+            prefix += c;
+            start = lower_bound(products, binary_start, prefix);
+            output.add(new ArrayList<>());
+            for(int i = start; i < Math.min(start + 3, n); i++){
+                if(products[i].length() < prefix.length() ||
+                  !products[i].substring(0, prefix.length()).equals(prefix))
+                    break;
+                output.get(output.size() - 1).add(products[i]);
+            }
+            binary_start = Math.abs(start);
+        }
+        return output;
+    }
+    
+    public int lower_bound(String[] products, int binary_start, String prefix){
+        int i = binary_start, n = products.length, mid;
+        while(i < n){
+            mid = i + (n - i) / 2;
+            if(products[mid].compareTo(prefix) >= 0)
+                n = mid;
+            else
+                i = mid + 1;
+        }
+        return i;
+    }
+}
