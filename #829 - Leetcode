@@ -1,0 +1,19 @@
+class Solution {
+    public int consecutiveNumbersSum(int n) {
+        int count = 0;
+        int upper_limit = (int)(Math.sqrt(2 * n + 0.25) - 0.5);
+        for(int k = 1; k <= upper_limit; k++){
+            if((n - k * (k + 1)/2) % k == 0)
+                count++;
+        }
+        return count;
+    }
+}
+
+//Time - sqrt(n)
+//space - o(1)
+//N = (x + 1) + ... + (x + k)
+//N = xk + k(k+1)/2
+//x = N/k - (k + 1)/2
+//Initiate the counter to 0
+//iterate over k from 1 to 
