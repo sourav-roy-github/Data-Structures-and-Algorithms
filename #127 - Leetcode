@@ -1,0 +1,52 @@
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        //Keep track of visited and neighbors
+        Queue<String> queue = new LinkedList<>();
+        
+        //improve thr runtime - constant lookup time
+        Set<String> words = new HashSet<>(wordList);
+        
+        //remove the begin word
+        words.remove(beginWord);
+        queue.add(beginWord);
+        //keep track of levels from begin word
+        int level = 0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            level++;
+            for(int i = 0; i < size; i++){
+                String currentWord = queue.poll();
+                if(currentWord.equals(endWord)) return level;
+                List<String> neigbors = neighbors(currentWord);
+                for(String n : neigbors){
+                    if(words.contains(n)){
+                        words.remove(n);
+                        queue.add(n);
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    public List<String> neighbors(String string){
+        char[] chars = string.toCharArray();
+        //go through each of the index, put all the chars in that position
+        //we convert it to a string and add it to the output set
+        List<String> output = new ArrayList<>();
+        for(int i = 0; i < chars.length; i++){
+            char temp = chars[i];
+            for(char c = 'a'; c <= 'z';c++){
+                chars[i] = c;
+                String neighbor = new String(chars);
+                output.add(neighbor);
+            }
+            //reset it to the original character
+            chars[i] = temp;
+        }
+       return output; 
+    }
+}
+//time - M - length of each word , n - length of the list
+//O(m ** 2 * n)
+//space - m * n
