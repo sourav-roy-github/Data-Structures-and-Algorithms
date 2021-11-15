@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isRobotBounded(String instructions) {
+        //North east south west
+        int[][] directions = new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
+        //starting point
+        int x = 0, y = 0;
+        //facing north
+        int i = 0;
+        for(int instruction : instructions.toCharArray()){
+            if(instruction == 'L')
+                i = (i + 3) % 4;
+            else if(instruction == 'R')
+                i = (i + 1) % 4;
+            else{
+                x += directions[i][0];
+                y += directions[i][1];
+            }
+        }
+        return ( x == 0 && y == 0) || (i != 0);
+    }
+}
+//time - o(n)
+//space - o(1)
