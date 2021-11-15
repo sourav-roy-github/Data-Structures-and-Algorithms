@@ -1,0 +1,80 @@
+class LRUCache {
+    class Node{
+        int key, val;
+        Node prev, next;
+        public Node(int key, int val){
+            this.key = key;
+            this.val = val;
+            prev = null;
+            next = null;
+        }
+    }
+    private HashMap<Integer, Node> hashmap;
+    private Node head, tail; //dummy
+    private int size;//current size of the cache
+    private int capacity;
+    
+    public LRUCache(int capacity) {
+        hashmap = new HashMap<>();
+        this.capacity = capacity;
+        size = 0;
+        head = new Node(0, 0);
+        tail = new Node(0, 0);
+        head.next = tail;
+        tail.prev = head;
+    }
+    //everything is passed by reference - so void
+    private void add(Node node){
+        node.next = tail;
+        node.prev = tail.prev;
+        tail.prev.next = node;
+        tail.prev = node;
+    }
+    
+    private void remove(Node node){
+        Node before = node.prev;
+        Node after = node.next;
+        before.next = after;
+        after.prev = before;
+        
+    }
+    private void update(Node node){
+        remove(node);
+        add(node);
+    }
+    
+    public int get(int key) {
+        Node curr = hashmap.get(key);
+        if(curr == null){
+            return -1;
+        }
+        update(curr);
+        return curr.val;
+    }
+    
+    public void put(int key, int value) {
+        Node curr = hashmap.get(key);
+        if(curr == null){
+            curr = new Node(key, value);
+            hashmap.put(key, curr);
+            size++;
+            add(curr);
+        }
+        else{
+            update(curr);
+            curr.val = value;
+            }
+        if(size > capacity){
+                size--;
+                hashmap.remove(head.next.key);
+                remove(head.next);
+        }
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
