@@ -1,0 +1,22 @@
+class Solution {
+    public int minSwaps(int[] data) {
+        int windowSize = 0;
+        for(int num : data){
+            windowSize += num;
+        }
+        int curOneWindow = 0;
+        int maxOneWindow = 0;
+        
+        for(int i = 0; i < data.length; i++){
+            curOneWindow += data[i];
+            if(i >= windowSize){
+               curOneWindow -= data[i - windowSize]; 
+            }
+            maxOneWindow = Math.max(maxOneWindow, curOneWindow);
+        }
+        
+        return windowSize - maxOneWindow;
+    }
+}
+//Time - O(n) - no of elements in the array
+//Spce = O(1)
