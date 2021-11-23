@@ -1,0 +1,19 @@
+class Solution {
+    public String addStrings(String num1, String num2) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+        int x = num1.length() - 1, y = num2.length() - 1; // Two pointers for the strings
+        while(x >= 0 || y >= 0){
+            int x1 = x >= 0 ? num1.charAt(x) - '0' : 0;
+            int y1 = y >= 0 ? num2.charAt(y) - '0' : 0;
+            int value = (x1 + y1 + carry) % 10;
+            carry = (x1 + y1 + carry) / 10;
+            result.append(value);
+            x--;
+            y--;
+        }
+        if(carry != 0)
+            result.append(carry);
+        return result.reverse().toString();
+    }
+}
