@@ -16,4 +16,4 @@ class Solution {
 }
 
 //TC - O(N)
-//SC - O(H) -> Height of the tree
+//SC - O(H) -> Height of the Tree
