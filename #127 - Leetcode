@@ -1,6 +1,7 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         //Keep track of visited and neighbors
+        
         Queue<String> queue = new LinkedList<>();
         
         //improve thr runtime - constant lookup time
