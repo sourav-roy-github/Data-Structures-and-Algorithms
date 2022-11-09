@@ -1,0 +1,25 @@
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode curr=head;
+        ListNode dummy=new ListNode();
+        dummy.next=head;
+        ListNode prev=dummy;
+        while(curr!=null && curr.next!=null)
+        {
+            //System.out.println(curr.val);
+            ListNode temp=curr.next.next;
+            
+            // insert curr.next between prev and curr
+            prev.next=curr.next;
+            prev.next.next=curr;
+            curr.next=temp;
+            
+            //move prev and curr pointer
+            prev=prev.next.next;
+            curr=curr.next;
+            
+
+        }
+        return dummy.next;
+    }
+}
